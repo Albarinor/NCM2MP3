@@ -21,6 +21,45 @@ If don't add command, there will open NCM2MP3 GUI directly
 -h,-help                      : Help about any command
 ```
 
+## Windows 构建与运行
+
+项目副本位于 `E:\Data\Hermes File\projects\NCM2MP3-3.2.0`。需要安装 JDK 8 或更高版本以及 Maven。
+
+在 Windows 命令提示符中执行：
+
+```bat
+cd /d "E:\Data\Hermes File\projects\NCM2MP3-3.2.0"
+mvn -B test
+mvn -B package
+```
+
+构建后的可运行 fat JAR 为 `target\NCM2MP3-3.1.0.jar`，运行方式：
+
+```bat
+java -jar "target\NCM2MP3-3.1.0.jar"
+```
+
+图形界面现在会分别记忆“选择文件”和“开始转换”最后一次确认的目录。路径保存在当前 Windows 用户的 Java Preferences 中；如果目录已不存在，会自动忽略并使用系统默认目录。
+
+### 生成 Windows 应用程序包
+
+在 JDK 14 或更高版本的 Windows 命令提示符中执行：
+
+```bat
+mkdir release
+jpackage ^
+  --type app-image ^
+  --name NCM2MP3 ^
+  --dest release ^
+  --input target ^
+  --main-jar NCM2MP3-3.1.0.jar ^
+  --main-class main ^
+  --add-modules java.desktop ^
+  --java-options "-Dfile.encoding=UTF-8"
+```
+
+生成目录为 `release\NCM2MP3\`，其中包含 `NCM2MP3.exe` 和运行时 `runtime` 目录，可直接复制到没有安装 Java 的 Windows 电脑上运行。`jpackage` 的输入必须使用包含依赖的 fat JAR；请先执行 `mvn package`。
+
 
 ## 原理说明
   NCM格式是网易云音乐特有的音乐格式,这种音乐格式用到AES,RC4的加密算法对普通的音乐格式(如MP3,FLAC)进行加密,若要了解该加密过程,最好的方法就是知道起格式图,以及加密的原理(可以参考笔记`密码学.md`).
@@ -74,7 +113,5 @@ If don't add command, there will open NCM2MP3 GUI directly
 ## 更多
 - 密码学.md:关于密码学相关知识不懂的可以查看该文档
 
-## 通知
-该工具是在大学期间为了学习密码学的时候，想通过实践的方式深入了解，通过`ncmdump`的版本，用Java改写的。现在工作了，由于时间有限，本工具不会继续更新，希望大家谅解～
-
+## 声明
 此工具仅供学习用途，请勿使用其盈利！

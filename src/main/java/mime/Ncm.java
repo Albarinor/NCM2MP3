@@ -1,12 +1,10 @@
 package mime;
 
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
  * @author charlottexiao
  */
-@Data
 @NoArgsConstructor
 public class Ncm {
 
@@ -29,6 +27,38 @@ public class Ncm {
      * 封面信息
      */
     private byte[] image;
+
+    public String getNcmFile() {
+        return ncmFile;
+    }
+
+    public void setNcmFile(String ncmFile) {
+        this.ncmFile = ncmFile;
+    }
+
+    public String getOutFile() {
+        return outFile;
+    }
+
+    public void setOutFile(String outFile) {
+        this.outFile = outFile;
+    }
+
+    public Mata getMata() {
+        return mata;
+    }
+
+    public void setMata(Mata mata) {
+        this.mata = mata;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 
 
 }
